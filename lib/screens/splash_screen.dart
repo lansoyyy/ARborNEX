@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:landscape/screens/login.dart';
+import 'package:landscape/screens/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -187,6 +187,7 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
                             style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
+                              color: Colors.green,
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -204,45 +205,73 @@ class _GetStartedScreenState extends State<GetStartedScreen> {
               },
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(
-              _onboardingData.length,
-              (index) => Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                width: _currentPage == index ? 12.0 : 8.0,
-                height: 8.0,
-                decoration: BoxDecoration(
-                  color: _currentPage == index ? Colors.green : Colors.grey,
-                  borderRadius: BorderRadius.circular(4.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const WelcomeScreen()),
+                    );
+                  },
+                  child: const Text(
+                    'Skip',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    _onboardingData.length,
+                    (index) => Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                      width: _currentPage == index ? 35.0 : 8.0,
+                      height: 8.0,
+                      decoration: BoxDecoration(
+                        color:
+                            _currentPage == index ? Colors.green : Colors.grey,
+                        borderRadius: BorderRadius.circular(4.0),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    if (_currentPage != 2) {
+                      setState(() {
+                        _currentPage++;
+                      });
+                      _pageController.animateToPage(
+                        _currentPage,
+                        duration: const Duration(milliseconds: 10),
+                        curve: Curves.bounceIn,
+                      );
+                    } else {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WelcomeScreen()),
+                      );
+                    }
+                  },
+                  child: Icon(
+                    Icons.arrow_circle_right_rounded,
+                    color: Colors.green[700],
+                    size: 40,
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-              child: Text(
-                _currentPage == _onboardingData.length - 1
-                    ? "Get Started"
-                    : "Skip",
-              ),
-            ),
-          ),
         ],
       ),
     );

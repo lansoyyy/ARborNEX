@@ -20,64 +20,89 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                  'assets/images/arbornex_logo.png'), // Replace with your asset
-              fit: BoxFit.cover,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Opacity(
+              opacity: 0.8, // Adjust the opacity value as needed
+
+              child: Image.asset(
+                'assets/images/new/image (2).png',
+                height: 309,
+              ),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 60),
-              // Header Section
-              Text(
-                'Welcome Back',
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green.shade700,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Login to your Account',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey.shade600,
-                ),
-              ),
-              const SizedBox(height: 30),
-              // Form Section
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: [
-                      // Email Input
-                      _buildEmailInput(),
-                      const SizedBox(height: 16),
-                      // Password Input
-                      _buildPasswordInput(),
-                      const SizedBox(height: 16),
-                      // Remember Me & Forgot Password
-                      _buildRememberMeAndForgotPassword(),
-                      const SizedBox(height: 24),
-                      // Login Button
-                      _buildLoginButton(context),
-                      const SizedBox(height: 24),
-                      // Sign-Up Redirect
-                      _buildSignUpRedirect(context),
-                    ],
+
+            Stack(
+              children: [
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Image.asset(
+                    'assets/images/new/image 11.png',
+                    height: 150,
                   ),
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox(
+                      width: 50,
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 50),
+                        // Header Section
+                        Text(
+                          'Welcome Back',
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green.shade700,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Login to your Account',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey.shade600,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            // Form Section
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    // Email Input
+                    _buildEmailInput(),
+                    const SizedBox(height: 16),
+                    // Password Input
+                    _buildPasswordInput(),
+                    const SizedBox(height: 16),
+                    // Remember Me & Forgot Password
+                    _buildRememberMeAndForgotPassword(),
+                    const SizedBox(height: 24),
+                    // Login Button
+                    _buildLoginButton(context),
+                    const SizedBox(height: 24),
+                    // Sign-Up Redirect
+                    _buildSignUpRedirect(context),
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -88,7 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
       controller: _emailController,
       decoration: InputDecoration(
         labelText: 'Email Address',
-        prefixIcon: const Icon(Icons.email, color: Colors.green),
+        prefixIcon:
+            const Icon(Icons.alternate_email_rounded, color: Colors.green),
         filled: true,
         fillColor: Colors.green.shade50,
         border: OutlineInputBorder(
@@ -148,16 +174,28 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         Row(
           children: [
-            Checkbox(
-              value: _rememberMe,
-              activeColor: Colors.green,
-              onChanged: (value) {
-                setState(() {
-                  _rememberMe = value!;
-                });
+            IconButton(
+              onPressed: () {
+                if (!_rememberMe) {
+                  setState(() {
+                    _rememberMe = true;
+                  });
+                } else {
+                  setState(() {
+                    _rememberMe = false;
+                  });
+                }
               },
+              icon: Icon(
+                _rememberMe ? Icons.check_circle : Icons.circle_outlined,
+                color: Colors.green.shade900,
+              ),
             ),
-            const Text('Remember me'),
+            const Row(
+              children: [
+                Text('Remember me'),
+              ],
+            ),
           ],
         ),
         GestureDetector(
@@ -170,7 +208,6 @@ class _LoginScreenState extends State<LoginScreen> {
             'Forget your Password?',
             style: TextStyle(
               color: Colors.green,
-              decoration: TextDecoration.underline,
             ),
           ),
         ),
@@ -190,13 +227,13 @@ class _LoginScreenState extends State<LoginScreen> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    MainScreen()), // Replace with actual home screen
+                    const MainScreen()), // Replace with actual home screen
           );
         }
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: Colors.green.shade700,
+        backgroundColor: Colors.green.shade900,
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -213,18 +250,18 @@ class _LoginScreenState extends State<LoginScreen> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  SignUpScreen()), // Replace with actual SignUpScreen
+                  const SignUpScreen()), // Replace with actual SignUpScreen
         );
       },
-      child: const Text.rich(
+      child: Text.rich(
         TextSpan(
           text: "Don't have an account? ",
-          style: TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Colors.grey),
           children: [
             TextSpan(
               text: 'Sign up',
               style: TextStyle(
-                color: Colors.green,
+                color: Colors.green.shade900,
                 fontWeight: FontWeight.bold,
               ),
             ),
