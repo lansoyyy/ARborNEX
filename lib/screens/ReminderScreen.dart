@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:landscape/screens/main_screen.dart';
+import 'package:landscape/screens/favorites_screen.dart';
 import 'package:landscape/screens/setting_screen.dart';
 
-class ReminderScreen extends StatefulWidget {
-  const ReminderScreen({super.key});
+class NewReminderScreen extends StatefulWidget {
+  const NewReminderScreen({super.key});
 
   @override
-  _ReminderScreenState createState() => _ReminderScreenState();
+  _NewReminderScreenState createState() => _NewReminderScreenState();
 }
 
-class _ReminderScreenState extends State<ReminderScreen> {
+class _NewReminderScreenState extends State<NewReminderScreen> {
   String selectedFilter = 'All'; // Default filter
 
   // List of reminders
@@ -50,16 +50,12 @@ class _ReminderScreenState extends State<ReminderScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      const MainScreen()), // Replace MainScreen() with your actual main screen widget.
-            );
-          },
+        leading: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(
+                'https://via.placeholder.com/150'), // Placeholder image
+          ),
         ),
         title: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,14 +74,20 @@ class _ReminderScreenState extends State<ReminderScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.favorite_border, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const FavoritesScreen()),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.black),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SettingsScreen()),
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
               );
             },
           ),

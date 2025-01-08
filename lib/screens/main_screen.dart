@@ -5,6 +5,7 @@ import 'package:landscape/screens/garden_planner_screen.dart';
 import 'package:landscape/screens/indoor_balcony_outdoor_traditional_landscaper_screen.dart';
 import 'package:landscape/screens/inspirational_ideas_screen.dart';
 import 'package:landscape/screens/my_project_screen.dart';
+import 'package:landscape/screens/notificationclientScreen.dart';
 import 'package:landscape/screens/plant_detail_screen.dart';
 import 'package:landscape/screens/reminder_screen.dart';
 
@@ -82,7 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
+              );
+            },
           ),
           GestureDetector(
             onTap: () {

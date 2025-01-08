@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:landscape/screens/edit_phone_number_screen.dart';
 import 'package:landscape/screens/edit_profile_screen.dart';
+import 'package:landscape/screens/welcome_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -24,28 +25,30 @@ class SettingsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        // Added SingleChildScrollView here
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
+            Center(
               child: Column(
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage(
-                        'assets/images/profiles.png'), // Replace with actual image path
+                    backgroundImage:
+                        const AssetImage('assets/images/profiles.png'),
+                    onBackgroundImageError: (_, __) {
+                      debugPrint("Failed to load profile image");
+                    },
                   ),
-                  SizedBox(height: 8),
-                  Text(
+                  const SizedBox(height: 8),
+                  const Text(
                     'Joel Manalo',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Text(
+                  const Text(
                     'pasadocutee@gmail.com',
                     style: TextStyle(
                       fontSize: 14,
@@ -118,23 +121,27 @@ class SettingsScreen extends StatelessWidget {
               trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               onTap: () {},
             ),
-            const SizedBox(height: 32), // Optional, for spacing at the bottom
-            Expanded(
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 24),
+            const SizedBox(height: 32),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Text(
-                    'Logout',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+                ),
+                child: const Text(
+                  'Logout',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
             ),

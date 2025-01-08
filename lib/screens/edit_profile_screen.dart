@@ -29,7 +29,7 @@ class EditProfileScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage('assets/images/profiles.png'), // Replace with actual image path
+                    backgroundImage: AssetImage('assets/images/profiless.png'), // Replace with actual image path
                   ),
                   SizedBox(height: 8),
                   Text(

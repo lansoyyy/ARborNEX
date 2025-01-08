@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:landscape/screens/landscaper_screens/landscaper_login.dart';
 import 'package:landscape/screens/login.dart';
 import 'package:landscape/screens/signup.dart';
 
@@ -86,6 +87,22 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LandScaperLoginScreen()),
+                  );
+                },
+                child: const Text(
+                  'Continue as Landscaper',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              )
             ],
           ),
         ),

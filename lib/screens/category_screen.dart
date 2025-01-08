@@ -14,7 +14,7 @@ class CategoryCard extends StatelessWidget {
         if (label == 'Indoor Garden') {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => IndoorGardenScreen()),
+            MaterialPageRoute(builder: (context) => const IndoorGardenScreen()),
           );
         }
       },

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:landscape/screens/favorites_screen.dart';
+import 'package:landscape/screens/setting_screen.dart';
 
 class IndoorGardenScreen extends StatelessWidget {
+  const IndoorGardenScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Indoor Garden"),
+        title: const Text("Indoor Garden"),
         backgroundColor: Colors.green,
       ),
       body: Column(
@@ -14,18 +18,19 @@ class IndoorGardenScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 30,
-                  backgroundImage: AssetImage('assets/images/profiless.png'), // Replace with actual profile image path
+                  backgroundImage: AssetImage(
+                      'assets/images/profiless.png'), // Replace with actual profile image path
                 ),
-                SizedBox(width: 16),
-                Column(
+                const SizedBox(width: 16),
+                const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Joel Manalo",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
                     Text(
                       "0393*******",
@@ -33,52 +38,86 @@ class IndoorGardenScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 IconButton(
-                  icon: Icon(Icons.favorite_border),
-                  onPressed: () {},
+                  icon: const Icon(Icons.favorite_border, color: Colors.black),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FavoritesScreen()),
+                    );
+                  },
                 ),
                 IconButton(
-                  icon: Icon(Icons.settings),
-                  onPressed: () {},
+                  icon: const Icon(Icons.settings, color: Colors.black),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            SettingsScreen(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(1.0, 0.0);
+                          const end = Offset.zero;
+                          const curve = Curves.easeInOut;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+                          var offsetAnimation = animation.drive(tween);
+                          return SlideTransition(
+                              position: offsetAnimation, child: child);
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Expanded(
             child: ListView(
-              padding: EdgeInsets.all(16.0),
-              children: [
+              padding: const EdgeInsets.all(16.0),
+              children: const [
                 CartItemCard(
                   name: 'Grey Star Calathea',
                   category: 'Indoor plants',
-                  price: 19.99,
-                  image: 'assets/images/plant1.png', // Replace with actual image path
+                  image:
+                      'assets/images/plant1.png', // Replace with actual image path
                 ),
                 CartItemCard(
-                  name: 'Monstera plants',
+                  name: 'Monstera Plants',
                   category: 'Indoor plants',
-                  price: 19.99,
-                  image: 'assets/images/plant2.png', // Replace with actual image path
+                  image:
+                      'assets/images/plant2.png', // Replace with actual image path
+                ),
+                CartItemCard(
+                  name: 'Chinese Money Plant',
+                  category: 'Indoor plants',
+                  image:
+                      'assets/images/cmp.png', // Replace with actual image path
+                ),
+                CartItemCard(
+                  name: 'Ponytail Palm',
+                  category: 'Indoor plants',
+                  image:
+                      'assets/images/ppg.png', // Replace with actual image path
+                ),
+                CartItemCard(
+                  name: 'Player Plant',
+                  category: 'Indoor plants',
+                  image:
+                      'assets/images/ppgg.png', // Replace with actual image path
+                ),
+                CartItemCard(
+                  name: 'Kentia Palm',
+                  category: 'Indoor plants',
+                  image:
+                      'assets/images/kpg.png', // Replace with actual image path
                 ),
               ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: () {
-                // Add navigation or functionality for checkout
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green[900],
-                minimumSize: Size(double.infinity, 50),
-              ),
-              child: Text(
-                "Continue to checkout",
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
             ),
           ),
         ],
@@ -90,64 +129,35 @@ class IndoorGardenScreen extends StatelessWidget {
 class CartItemCard extends StatelessWidget {
   final String name;
   final String category;
-  final double price;
   final String image;
 
-  CartItemCard({
+  const CartItemCard({
+    super.key,
     required this.name,
     required this.category,
-    required this.price,
     required this.image,
   });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
             Image.asset(image, width: 60, height: 60, fit: BoxFit.cover),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(name,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16)),
-                  Text(category, style: TextStyle(color: Colors.grey)),
+                  Text(category, style: const TextStyle(color: Colors.grey)),
                 ],
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text("\$${price.toStringAsFixed(2)}",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 16)),
-                Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.remove, size: 16),
-                      onPressed: () {
-                        // Decrease quantity logic
-                      },
-                    ),
-                    Text(
-                      "1", // Replace with dynamic quantity
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.add, size: 16),
-                      onPressed: () {
-                        // Increase quantity logic
-                      },
-                    ),
-                  ],
-                ),
-              ],
             ),
           ],
         ),
