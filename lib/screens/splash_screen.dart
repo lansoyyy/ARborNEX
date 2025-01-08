@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:landscape/screens/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -11,46 +10,37 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation<double> _logoAnimation;
-  late Animation<Offset> _textSlideAnimation;
+  late Animation<double> _fadeAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    // Animation Controller
+    // Initialize Animation Controller
     _controller = AnimationController(
-      duration: const Duration(seconds: 3),
       vsync: this,
+      duration: const Duration(seconds: 2),
     );
 
-    // Bounce Animation for Logo
-    _logoAnimation = CurvedAnimation(
+    // Fade animation for the logo
+    _fadeAnimation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.elasticOut,
+      curve: Curves.easeIn,
     );
 
-    // Slide Up and Fade Animation for Text
-    _textSlideAnimation = Tween<Offset>(
-      begin: const Offset(0, 1),
-      end: const Offset(0, 0),
-    ).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeOut,
-      ),
-    );
-
+    // Start animation
     _controller.forward();
 
-    // Navigate to GetStartedScreen after a delay
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const GetStartedScreen()),
-      );
+    // Navigate to the next screen after the animation (e.g., Home screen)
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 4), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const GetStartedScreen()),
+        );
+      });
     });
   }
 
@@ -64,47 +54,29 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.green.shade900, Colors.green.shade500],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+        decoration: const BoxDecoration(
+          color: Colors.black,
+          image: DecorationImage(
+            opacity: 0.75,
+            image: AssetImage(
+                'assets/images/new/image 7.png'), // Replace with your background image
+            fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Animated Logo with Bounce Effect
-              ScaleTransition(
-                scale: _logoAnimation,
-                child: Image.asset(
-                  'assets/images/arbornex_logo.png', // Replace with your logo asset
-                  height: 120,
-                  width: 120,
+        child: FadeTransition(
+          opacity: _fadeAnimation,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo
+                Image.asset(
+                  'assets/images/new/iPhone 14 & 15 Pro Max - 1.png', // Replace with your logo image
+                  width: 300,
+                  height: 300,
                 ),
-              ),
-              const SizedBox(height: 30),
-              // Animated Text with Slide and Fade Effect
-              SlideTransition(
-                position: _textSlideAnimation,
-                child: const Text(
-                  'ARborNex',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    shadows: [
-                      Shadow(
-                        blurRadius: 10.0,
-                        color: Colors.black45,
-                        offset: Offset(2.0, 2.0),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
