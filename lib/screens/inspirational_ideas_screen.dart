@@ -9,7 +9,7 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
+        title: const Center(
           child: Text(
             'INSPIRATION IDEAS',
             style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
@@ -40,8 +40,8 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 // Title and Heart Icon Section (Title on the left, Heart icon on the right)
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -79,13 +79,13 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/balconyinspo.png', // Replace with your asset image
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/balcony2.png', // Replace with your asset image
                           width: 150,
@@ -97,8 +97,8 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
                 ),
 
                 // Suggested Plants Title
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Suggested Balcony Plants',
                     style: TextStyle(
@@ -124,12 +124,12 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Snake Planr',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -138,12 +138,12 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Siit - Siit',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -152,12 +152,12 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Cactus',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -166,7 +166,7 @@ class BalconyInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Tulips',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
@@ -195,7 +195,7 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
+        title: const Center(
           child: Text(
             'INSPIRATION IDEAS',
             style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
@@ -226,8 +226,8 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 // Title and Heart Icon Section (Title on the left, Heart icon on the right)
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -265,13 +265,13 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/indoor1.png', // Replace with your asset image
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/indoor2.png', // Replace with your asset image
                           width: 150,
@@ -283,8 +283,8 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
                 ),
 
                 // Suggested Plants Title
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Suggested Indoor Plants',
                     style: TextStyle(
@@ -310,12 +310,12 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Grey Star Calathea',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -324,12 +324,12 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Terrarium',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -338,12 +338,12 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Welcome Plant',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -352,7 +352,7 @@ class IndoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Calla Lily',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
@@ -380,7 +380,7 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
+        title: const Center(
           child: Text(
             'INSPIRATION IDEAS',
             style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
@@ -411,8 +411,8 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 // Title and Heart Icon Section (Title on the left, Heart icon on the right)
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -450,13 +450,13 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/outdoor1.png',
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/outdoor3.png',
                           width: 150,
@@ -468,8 +468,8 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
                 ),
 
                 // Suggested Plants Title
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Suggested Outdoor Plants',
                     style: TextStyle(
@@ -495,12 +495,12 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Tapiary Plants',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -509,12 +509,12 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Umbrella Bamboo',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -523,12 +523,12 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Monstera Plant',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -537,7 +537,7 @@ class OutdoorInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Ferns',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
@@ -565,7 +565,7 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Center(
+        title: const Center(
           child: Text(
             'INSPIRATION IDEAS',
             style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
@@ -596,8 +596,8 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 // Title and Heart Icon Section (Title on the left, Heart icon on the right)
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -635,13 +635,13 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/traditional2.jpg',
                           width: 150,
                           fit: BoxFit.cover,
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Image.asset(
                           'assets/images/traditional1.jpg',
                           width: 150,
@@ -653,8 +653,8 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
                 ),
 
                 // Suggested Plants Title
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'Suggested Traditioanal Plants',
                     style: TextStyle(
@@ -680,12 +680,12 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Madhuriam',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -694,12 +694,12 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Nayantora',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -708,12 +708,12 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Bormanimuni',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Image.asset(
@@ -722,7 +722,7 @@ class TraditionalInspirationalIdeasScreen extends StatelessWidget {
                               height: 100,
                               fit: BoxFit.cover,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
                             Text('Titaphul',
                                 style: TextStyle(color: Colors.grey[800])),
                           ],

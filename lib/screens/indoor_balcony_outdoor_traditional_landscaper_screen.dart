@@ -4,9 +4,16 @@ import 'package:landscape/screens/main_screen.dart';
 import 'details_screen.dart';
 
 //INDOOR ARTIST
-class IndoorLandscaperScreen extends StatelessWidget {
-  const IndoorLandscaperScreen({super.key});
+class IndoorLandscaperScreen extends StatefulWidget {
+  String type;
 
+  IndoorLandscaperScreen({super.key, required this.type});
+
+  @override
+  State<IndoorLandscaperScreen> createState() => _IndoorLandscaperScreenState();
+}
+
+class _IndoorLandscaperScreenState extends State<IndoorLandscaperScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,16 +21,13 @@ class IndoorLandscaperScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => MainScreen()),
-            );
+            Navigator.pop(context);
           },
         ),
-        title: const Center(
+        title: Center(
           child: Text(
-            "INDOOR LANDSCAPING",
-            style: TextStyle(
+            widget.type,
+            style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF004422)),
@@ -36,43 +40,66 @@ class IndoorLandscaperScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                color: const Color(0xFF004422),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "Landscaper Expert",
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Image.asset(
+                'assets/images/new/Group 76174.png',
+                width: 200,
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            type: 'Landscape Architect',
+                            imagePath: 'assets/images/image 1.png',
+                            title: "Harrison Grove ",
+                            number: "(312) 555-2090",
+                            email: "harrison@gmail.com",
+                            projectDescription:
+                                'I bring a unique blend of horticulture expertise, landscape creativity, and dedication to every project. With a strong background in plant selection, garden design, and sustainable landscaping practices, I’m committed to delivering high-quality results that align with your vision and enhance your outdoor space. My attention to detail, problem-solving skills, and focus on client satisfaction make me an ideal choice for your landscaping needs.',
+                            additionalInfo:
+                                'Additional information for project 1.',
+                            likes: "123",
+                          ),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/images/new/Frame 279338.png',
+                      height: 250,
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildCard(
-                    context,
-                    'assets/images/image 1.png',
-                    "Harrison Grove ",
-                    "(312) 555-2090",
-                    "harrison@gmail.com",
-                    'I bring a unique blend of horticulture expertise, landscape creativity, and dedication to every project. With a strong background in plant selection, garden design, and sustainable landscaping practices, I’m committed to delivering high-quality results that align with your vision and enhance your outdoor space. My attention to detail, problem-solving skills, and focus on client satisfaction make me an ideal choice for your landscaping needs.',
-                    'Additional information for project 1.',
-                    "123",
-                  ),
-                  buildCard(
-                    context,
-                    'assets/images/image 2.png',
-                    'Jonie Josh Delocal',
-                    "(312) 555-0179",
-                    "joniejos@gmail.com",
-                    'I combine a passion for horticulture with an artistic approach to landscaping, ensuring each project reflects your unique style. With extensive experience in selecting the right plants, designing vibrant gardens, and using eco-friendly practices, I strive to create stunning outdoor spaces. My commitment to precision, creative problem-solving, and delivering exceptional results makes me the perfect partner for transforming your landscape.',
-                    'Additional information for project 2.',
-                    "456",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            type: 'Landscape Architect',
+                            imagePath: 'assets/images/image 2.png',
+                            title: 'Jonie Josh Delocal',
+                            number: "(312) 555-0179",
+                            email: "joniejos@gmail.com",
+                            projectDescription:
+                                'I combine a passion for horticulture with an artistic approach to landscaping, ensuring each project reflects your unique style. With extensive experience in selecting the right plants, designing vibrant gardens, and using eco-friendly practices, I strive to create stunning outdoor spaces. My commitment to precision, creative problem-solving, and delivering exceptional results makes me the perfect partner for transforming your landscape.',
+                            additionalInfo:
+                                'Additional information for project 2.',
+                            likes: "456",
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Image.asset(
+                        'assets/images/new/Frame 279339.png',
+                        height: 270,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -80,28 +107,112 @@ class IndoorLandscaperScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  buildCard(
-                    context,
-                    'assets/images/image 3.png',
-                    'Hannah Francheska Lopez',
-                    "(312) 555-5080",
-                    "hannahh@gmail.com",
-                    'I bring a deep passion for plants and a creative flair for landscape design to every project, ensuring your outdoor space truly represents your vision. With expertise in selecting the perfect plants, crafting beautiful garden layouts, and applying sustainable practices, I aim to create landscapes that are both breathtaking and eco-friendly. My focus on detail, innovative solutions, and commitment to outstanding results make me the ideal choice for bringing your landscape dreams to life.',
-                    'Additional information for project 3.',
-                    "789",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            type: 'Landscape Designer',
+                            imagePath: 'assets/images/image 3.png',
+                            title: 'Hannah Francheska Lopez',
+                            number: "(312) 555-5080",
+                            email: "hannahh@gmail.com",
+                            projectDescription:
+                                'I bring a deep passion for plants and a creative flair for landscape design to every project, ensuring your outdoor space truly represents your vision. With expertise in selecting the perfect plants, crafting beautiful garden layouts, and applying sustainable practices, I aim to create landscapes that are both breathtaking and eco-friendly. My focus on detail, innovative solutions, and commitment to outstanding results make me the ideal choice for bringing your landscape dreams to life.',
+                            additionalInfo:
+                                'Additional information for project 3.',
+                            likes: "789",
+                          ),
+                        ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      child: Image.asset(
+                        'assets/images/new/Frame 279340.png',
+                        height: 270,
+                      ),
+                    ),
                   ),
-                  buildCard(
-                    context,
-                    'assets/images/image 4.png',
-                    'Neoil Retol',
-                    "(312) 555-6070",
-                    "cyril@gmail.com",
-                    'I blend a love for plants with a creative touch in landscape design, ensuring that each project reflects your unique vision. My expertise in choosing the right plants, designing harmonious garden spaces, and incorporating sustainable solutions allows me to create outdoor environments that are both beautiful and environmentally responsible. With a keen eye for detail, a passion for innovative design, and a commitment to excellence, I’m dedicated to transforming your outdoor space into a stunning reflection of your style.',
-                    'Additional information for project 4.',
-                    "1102",
-                  )
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DetailsScreen(
+                            type: 'Horticulturist',
+                            imagePath: 'assets/images/image 4.png',
+                            title: 'Neoil Retol',
+                            number: "(312) 555-6070",
+                            email: "cyril@gmail.com",
+                            projectDescription:
+                                'I blend a love for plants with a creative touch in landscape design, ensuring that each project reflects your unique vision. My expertise in choosing the right plants, designing harmonious garden spaces, and incorporating sustainable solutions allows me to create outdoor environments that are both beautiful and environmentally responsible. With a keen eye for detail, a passion for innovative design, and a commitment to excellence, I’m dedicated to transforming your outdoor space into a stunning reflection of your style.',
+                            additionalInfo:
+                                'Additional information for project 4.',
+                            likes: "1102",
+                          ),
+                        ),
+                      );
+                    },
+                    child: Image.asset(
+                      'assets/images/new/Frame 279341.png',
+                      height: 250,
+                    ),
+                  ),
                 ],
               ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     buildCard(
+              //       context,
+              //       'assets/images/image 1.png',
+              //       "Harrison Grove ",
+              //       "(312) 555-2090",
+              //       "harrison@gmail.com",
+              //       'I bring a unique blend of horticulture expertise, landscape creativity, and dedication to every project. With a strong background in plant selection, garden design, and sustainable landscaping practices, I’m committed to delivering high-quality results that align with your vision and enhance your outdoor space. My attention to detail, problem-solving skills, and focus on client satisfaction make me an ideal choice for your landscaping needs.',
+              //       'Additional information for project 1.',
+              //       "123",
+              //     ),
+              //     buildCard(
+              //       context,
+              //       'assets/images/image 2.png',
+              //       'Jonie Josh Delocal',
+              //       "(312) 555-0179",
+              //       "joniejos@gmail.com",
+              //       'I combine a passion for horticulture with an artistic approach to landscaping, ensuring each project reflects your unique style. With extensive experience in selecting the right plants, designing vibrant gardens, and using eco-friendly practices, I strive to create stunning outdoor spaces. My commitment to precision, creative problem-solving, and delivering exceptional results makes me the perfect partner for transforming your landscape.',
+              //       'Additional information for project 2.',
+              //       "456",
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(height: 20),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     buildCard(
+              //       context,
+              //       'assets/images/image 3.png',
+              //       'Hannah Francheska Lopez',
+              //       "(312) 555-5080",
+              //       "hannahh@gmail.com",
+              //       'I bring a deep passion for plants and a creative flair for landscape design to every project, ensuring your outdoor space truly represents your vision. With expertise in selecting the perfect plants, crafting beautiful garden layouts, and applying sustainable practices, I aim to create landscapes that are both breathtaking and eco-friendly. My focus on detail, innovative solutions, and commitment to outstanding results make me the ideal choice for bringing your landscape dreams to life.',
+              //       'Additional information for project 3.',
+              //       "789",
+              //     ),
+              //     buildCard(
+              //       context,
+              //       'assets/images/image 4.png',
+              //       'Neoil Retol',
+              //       "(312) 555-6070",
+              //       "cyril@gmail.com",
+              //       'I blend a love for plants with a creative touch in landscape design, ensuring that each project reflects your unique vision. My expertise in choosing the right plants, designing harmonious garden spaces, and incorporating sustainable solutions allows me to create outdoor environments that are both beautiful and environmentally responsible. With a keen eye for detail, a passion for innovative design, and a commitment to excellence, I’m dedicated to transforming your outdoor space into a stunning reflection of your style.',
+              //       'Additional information for project 4.',
+              //       "1102",
+              //     )
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -109,105 +220,105 @@ class IndoorLandscaperScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCard(
-    BuildContext context,
-    String imagePath,
-    String title,
-    String number,
-    String email,
-    String description,
-    String additionalInfo,
-    String likes,
-  ) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailsScreen(
-              imagePath: imagePath, // Passing the imagePath here
-              title: title,
-              number: number,
-              email: email,
-              projectDescription: description,
-              additionalInfo: additionalInfo,
-              likes: likes,
-            ),
-          ),
-        );
-      },
-      child: Card(
-        elevation: 5,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Container(
-          width: 185,
-          height: 250,
-          padding: const EdgeInsets.all(10),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(imagePath),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: -8,
-                top: 20,
-                child: RotatedBox(
-                  quarterTurns: 3,
-                  child: Stack(
-                    children: [
-                      Text(
-                        "Landscape Architecture",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          foreground: Paint()
-                            ..style = PaintingStyle.stroke
-                            ..strokeWidth = 2
-                            ..color = Colors.white,
-                        ),
-                      ),
-                      const Text(
-                        "Landscape Architecture",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF004422),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                right: 10,
-                top: 10,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(5, (index) {
-                    return const Icon(
-                      Icons.star,
-                      size: 16,
-                      color: Colors.green,
-                    );
-                  }),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget buildCard(
+  //   BuildContext context,
+  //   String imagePath,
+  //   String title,
+  //   String number,
+  //   String email,
+  //   String description,
+  //   String additionalInfo,
+  //   String likes,
+  // ) {
+  //   return GestureDetector(
+  //     onTap: () {
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => DetailsScreen(
+  //             imagePath: imagePath, // Passing the imagePath here
+  //             title: title,
+  //             number: number,
+  //             email: email,
+  //             projectDescription: description,
+  //             additionalInfo: additionalInfo,
+  //             likes: likes,
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //     child: Card(
+  //       elevation: 5,
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       child: Container(
+  //         width: 185,
+  //         height: 250,
+  //         padding: const EdgeInsets.all(10),
+  //         child: Stack(
+  //           children: [
+  //             Positioned.fill(
+  //               child: Container(
+  //                 decoration: BoxDecoration(
+  //                   image: DecorationImage(
+  //                     image: AssetImage(imagePath),
+  //                     fit: BoxFit.cover,
+  //                   ),
+  //                   borderRadius: BorderRadius.circular(8),
+  //                 ),
+  //               ),
+  //             ),
+  //             Positioned(
+  //               left: -8,
+  //               top: 20,
+  //               child: RotatedBox(
+  //                 quarterTurns: 3,
+  //                 child: Stack(
+  //                   children: [
+  //                     Text(
+  //                       "Landscape Architecture",
+  //                       style: TextStyle(
+  //                         fontSize: 18,
+  //                         fontWeight: FontWeight.bold,
+  //                         foreground: Paint()
+  //                           ..style = PaintingStyle.stroke
+  //                           ..strokeWidth = 2
+  //                           ..color = Colors.white,
+  //                       ),
+  //                     ),
+  //                     const Text(
+  //                       "Landscape Architecture",
+  //                       style: TextStyle(
+  //                         fontSize: 18,
+  //                         fontWeight: FontWeight.bold,
+  //                         color: Color(0xFF004422),
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ),
+  //             Positioned(
+  //               right: 10,
+  //               top: 10,
+  //               child: Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: List.generate(5, (index) {
+  //                   return const Icon(
+  //                     Icons.star,
+  //                     size: 16,
+  //                     color: Colors.green,
+  //                   );
+  //                 }),
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 //OUTDOOR ARTIST
@@ -223,7 +334,7 @@ class OutdoorLandscapingScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MainScreen()),
+              MaterialPageRoute(builder: (context) => const MainScreen()),
             );
           },
         ),
@@ -332,6 +443,7 @@ class OutdoorLandscapingScreen extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailsScreen(
+              type: '',
               imagePath: imagePath, // Passing the imagePath here
               title: title,
               number: number,
@@ -430,7 +542,7 @@ class BalconyLandscaperScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MainScreen()),
+              MaterialPageRoute(builder: (context) => const MainScreen()),
             );
           },
         ),
@@ -539,6 +651,7 @@ class BalconyLandscaperScreen extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailsScreen(
+              type: '',
               imagePath: imagePath, // Passing the imagePath here
               title: title,
               number: number,
@@ -637,7 +750,7 @@ class TraditionalLandscaperScreen extends StatelessWidget {
           onPressed: () {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => MainScreen()),
+              MaterialPageRoute(builder: (context) => const MainScreen()),
             );
           },
         ),
@@ -746,6 +859,7 @@ class TraditionalLandscaperScreen extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => DetailsScreen(
+              type: '',
               imagePath: imagePath, // Passing the imagePath here
               title: title,
               number: number,

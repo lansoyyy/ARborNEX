@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:landscape/helpers/plant_data.dart';
 import 'package:landscape/screens/best_landscapers_main.dart';
-import 'package:landscape/screens/diverse_plant_variarities.dart';
 import 'package:landscape/screens/garden_planner_screen.dart';
 import 'package:landscape/screens/indoor_balcony_outdoor_traditional_landscaper_screen.dart';
 import 'package:landscape/screens/inspirational_ideas_screen.dart';
 import 'package:landscape/screens/my_project_screen.dart';
+import 'package:landscape/screens/plant_detail_screen.dart';
 import 'package:landscape/screens/reminder_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = [
     const HomeScreen(),
-    ArborNexScreen(), // Replace placeholder with the actual screen
+    const ArborNexScreen(), // Replace placeholder with the actual screen
     GardenPlannerScreen(),
     const HireScreen(),
   ];
@@ -53,11 +54,20 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+String searched = '';
+final search = TextEditingController();
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    print(searched);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -78,7 +88,7 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ReminderScreen()),
+                MaterialPageRoute(builder: (context) => const ReminderScreen()),
               );
             },
             child: const CircleAvatar(
@@ -96,6 +106,12 @@ class HomeScreen extends StatelessWidget {
             children: [
               // Search Bar
               TextField(
+                controller: search,
+                onChanged: (value) {
+                  setState(() {
+                    searched = value;
+                  });
+                },
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.search),
                   hintText: 'Search for plants, tools, and more',
@@ -180,79 +196,51 @@ class HomeScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // Example for Snake Plant
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InfoPlant(
-                            plantName: 'Snake Plant',
-                            plantImage: 'assets/images/snake_plant.png',
-                            plantDescription:
-                                'A beautiful and hardy indoor plant.',
-                            plantCareInstructions: const [
-                              'Water regularly, but do not overwater.',
-                              'Place in a well-lit spot away from direct sunlight.',
-                              'Repot every 2 years.'
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    child: buildPlantCircle(
-                        'Snake Plant', 'assets/images/snake_plant.png'),
-                  ),
+              Builder(builder: (context) {
+                final filteredPlants = plants.where((element) {
+                  return element.name
+                      .toLowerCase()
+                      .contains(searched.toLowerCase());
+                }).toList();
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // Example for Snake Plant
+                      // Filter the plants list based on the search query
 
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InfoPlant(
-                            plantName: 'Cactus Plant',
-                            plantImage: 'assets/images/cactus.png',
-                            plantDescription:
-                                'A beautiful and hardy indoor plant.',
-                            plantCareInstructions: const [
-                              'Water regularly, but do not overwater.',
-                              'Place in a well-lit spot away from direct sunlight.',
-                              'Repot every 2 years.'
-                            ],
+                      // Iterate over the filtered list
+                      for (int i = 0; i < filteredPlants.length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PlantDetailScreen(
+                                    plantName: filteredPlants[i].name,
+                                    plantImage:
+                                        'assets/images/new/${filteredPlants[i].name}.png',
+                                    plantDescription:
+                                        filteredPlants[i].description,
+                                    plantCareInstructions:
+                                        filteredPlants[i].tips,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: buildPlantCircle(
+                              filteredPlants[i].name,
+                              'assets/images/new/${filteredPlants[i].name}.png',
+                            ),
                           ),
                         ),
-                      );
-                    },
-                    child:
-                        buildPlantCircle('Cactus', 'assets/images/cactus.png'),
+                    ],
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InfoPlant(
-                            plantName: 'Calla Lily',
-                            plantImage: 'assets/images/orchid.png',
-                            plantDescription:
-                                'A beautiful and hardy indoor plant.',
-                            plantCareInstructions: const [
-                              'Water regularly, but do not overwater.',
-                              'Place in a well-lit spot away from direct sunlight.',
-                              'Repot every 2 years.'
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    child: buildPlantCircle(
-                        'Calla Lily', 'assets/images/orchid.png'),
-                  ),
-                ],
-              ),
+                );
+              }),
 
               const SizedBox(height: 16),
 
@@ -345,26 +333,47 @@ class HomeScreen extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         image: DecorationImage(
-          image: AssetImage(imagePath),
+          image: AssetImage(imagePath), // Replace with your image path
           fit: BoxFit.cover,
         ),
       ),
-      child: Container(
-        alignment: Alignment.bottomLeft,
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: const LinearGradient(
-            colors: [Colors.black54, Colors.transparent],
-            begin: Alignment.bottomCenter,
-            end: Alignment.center,
+      child: Stack(
+        children: [
+          // Gradient Overlay
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: const LinearGradient(
+                colors: [Colors.black54, Colors.transparent],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
-        ),
-        child: Text(
-          title,
-          style:
-              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
+          // Title Text
+          Positioned(
+            top: 8,
+            left: 8,
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          // Heart Icon
+          const Positioned(
+            bottom: 8,
+            right: 8,
+            child: Icon(
+              Icons.favorite_border,
+              size: 20,
+              color: Colors.white,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -373,6 +382,7 @@ class HomeScreen extends StatelessWidget {
     return Column(
       children: [
         CircleAvatar(
+          backgroundColor: Colors.white,
           radius: 40,
           backgroundImage: AssetImage(imagePath),
         ),
@@ -383,31 +393,41 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget buildCollectionCard(String title, String imagePath) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Container(
-        alignment: Alignment.bottomLeft,
-        padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          gradient: const LinearGradient(
-            colors: [Colors.black54, Colors.transparent],
-            begin: Alignment.bottomCenter,
-            end: Alignment.center,
+    return Column(
+      children: [
+        Container(
+          height: 130,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            image: DecorationImage(
+              image: AssetImage(imagePath),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Container(
+            alignment: Alignment.bottomLeft,
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: const LinearGradient(
+                colors: [Colors.black54, Colors.transparent],
+                begin: Alignment.bottomCenter,
+                end: Alignment.center,
+              ),
+            ),
           ),
         ),
-        child: Text(
-          title,
-          style:
-              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        const SizedBox(
+          height: 3,
         ),
-      ),
+        Text(
+          title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(
+              color: Colors.black, fontWeight: FontWeight.normal, fontSize: 14),
+        ),
+      ],
     );
   }
 }
@@ -437,7 +457,7 @@ class HireScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ReminderScreen()),
+                MaterialPageRoute(builder: (context) => const ReminderScreen()),
               );
             },
             child: const CircleAvatar(
@@ -455,7 +475,7 @@ class HireScreen extends StatelessWidget {
             children: [
               // Header Banner
               Container(
-                height: 200,
+                height: 350,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   image: const DecorationImage(
@@ -464,25 +484,28 @@ class HireScreen extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  alignment: Alignment.bottomLeft,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    gradient: const LinearGradient(
-                      colors: [Colors.black54, Colors.transparent],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.center,
+                    alignment: Alignment.bottomLeft,
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: const LinearGradient(
+                        colors: [Colors.black54, Colors.transparent],
+                        begin: Alignment.topLeft,
+                        end: Alignment.topRight,
+                      ),
                     ),
-                  ),
-                  child: const Text(
-                    'HIRE A LANDSCAPER EXPERT',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
+                    child: const Column(
+                      children: [
+                        Text(
+                          'HIRE A\nLANDSCAPER\nEXPERT',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                          ),
+                        ),
+                      ],
+                    )),
               ),
               const SizedBox(height: 16),
 
@@ -496,32 +519,52 @@ class HireScreen extends StatelessWidget {
               // Landscape Categories
               GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 0,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  buildCategoryCard('Indoor Gardening',
-                      'assets/images/indoor_gardening.png', context,
-                      navigateTo: const IndoorLandscaperScreen()),
-                  buildCategoryCard('Balcony Landscaping',
-                      'assets/images/balcony_landscaping.png', context,
-                      navigateTo: const BalconyLandscaperScreen()),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildCategoryCard('Indoor Gardening',
+                        'assets/images/indoor_gardening.png', context,
+                        navigateTo: IndoorLandscaperScreen(
+                          type: 'Indoor Gardening',
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildCategoryCard('Balcony Landscaping',
+                        'assets/images/balcony_landscaping.png', context,
+                        navigateTo: IndoorLandscaperScreen(
+                          type: 'Balcony Landscaping',
+                        )),
+                  ),
                 ],
               ),
               GridView.count(
                 crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 0,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 children: [
-                  buildCategoryCard('Outdoor Landscaping',
-                      'assets/images/outdoor_landscaping.png', context,
-                      navigateTo: const OutdoorLandscapingScreen()),
-                  buildCategoryCard('Traditional Landscaping',
-                      'assets/images/traditional_landscaping.png', context,
-                      navigateTo: const TraditionalLandscaperScreen()),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildCategoryCard('Outdoor Landscaping',
+                        'assets/images/outdoor_landscaping.png', context,
+                        navigateTo: IndoorLandscaperScreen(
+                          type: 'Outdoor Landscaping',
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: buildCategoryCard('Traditional Landscaping',
+                        'assets/images/traditional_landscaping.png', context,
+                        navigateTo: IndoorLandscaperScreen(
+                          type: 'Traditional Landscaping',
+                        )),
+                  ),
                 ],
               ),
             ],
@@ -540,31 +583,51 @@ class HireScreen extends StatelessWidget {
               context, MaterialPageRoute(builder: (context) => navigateTo));
         }
       },
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
-            image: AssetImage(imagePath),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Container(
-          alignment: Alignment.bottomLeft,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: const LinearGradient(
-              colors: [Colors.black54, Colors.transparent],
-              begin: Alignment.bottomCenter,
-              end: Alignment.center,
+      child: Stack(
+        children: [
+          // Background image with rounded corners
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(imagePath),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-          child: Text(
-            title,
-            style: const TextStyle(
-                color: Colors.white, fontWeight: FontWeight.bold),
+          // Gradient overlay
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: LinearGradient(
+                colors: [
+                  Colors.black.withOpacity(0.6), // Top part of the gradient
+                  Colors.black.withOpacity(0.3), // Middle part
+                  Colors.transparent, // Bottom part of the gradient
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
-        ),
+          // Content on top of the gradient
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
