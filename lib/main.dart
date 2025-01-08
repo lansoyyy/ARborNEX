@@ -2,7 +2,7 @@
 // import 'package:arbornex/screens/splash_screen.dart';
 // import 'package:arbornex/screens/topdeals_hotdealcard_fetaureddealcard_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:landscape/screens/main_screen.dart';
+import 'package:landscape/screens/splash_screen.dart';
 
 void main() {
   runApp(const ArborNexApp());
@@ -19,7 +19,7 @@ class ArborNexApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MainScreen(),
+      home: const SplashScreen(),
     );
   }
 }
